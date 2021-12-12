@@ -8,6 +8,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+import json
 
 from gym_chrome_dino.utils.helpers import download_chromedriver
 
@@ -21,8 +22,7 @@ class DinoGame():
         options.add_argument('--mute-audio')
         options.add_argument('--no-sandbox')
         options.add_argument('--window-size=800,600')
-        if not render:
-            options.add_argument('--headless')
+        #options.add_argument('--headless')
         self.driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
         # self.driver.get('chrome://dino')
         self.driver.get('https://elvisyjlin.github.io/t-rex-runner/')
@@ -55,9 +55,6 @@ class DinoGame():
     
     def press_up(self):
         return self.driver.find_element_by_tag_name('body').send_keys(Keys.UP)
-    
-    def press_down(self):
-        return self.driver.find_element_by_tag_name('body').send_keys(Keys.DOWN)
     
     def pause(self):
         return self.driver.execute_script('Runner.instance_.stop();')
